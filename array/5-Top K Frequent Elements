@@ -1,0 +1,77 @@
+''' 5-Top K Frequent Elements'''
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        
+        frekanslar = dict()
+
+
+        for i in nums:
+
+            frekanslar[i]=1+frekanslar.get(i,0)   #Burda elemanı kendisini değil elemanı görünce +1 yapmam gerekli ama nasıl doğru olarak yapıcam.(Burası problemli doğru yazım nasıl bilmiyorum)-->
+                                                  #Frekans sayacağımız için boş key oluşturup buna ekleme yapmak olmaz.Bu ndednle get fonksiyonunu kullanmak gerekli default değer de sunuyor frekans da ekliyor.
+
+
+        #Elimdeki frekanslar hash_map'i için sözlüğü sort edersem(edebiliyor muyum bilmiyotum ama)-->Evet edebilirsin itemları alıp lambda kullanarak values a göre sıraladım.reverse True ile de tersten sıraladım ki büüykten küçüğe olsun.
+
+        items=sorted(frekanslar.items(),key=lambda x: x[1] ,reverse=True)#İtemler burda tule olarak dönecek.key=lambdax:x[1] ile de neye göre sıralayacağımızı belirledik,ki burda ikinci eleman olan values olacak
+
+        #hatta azalana göre sıralayabilirsem ilk k elemanı çekmem yeterli olacaltır.
+        #Value'lara göre büyükten küçüğe sıralamam lazım
+
+        #countS[s[i]] = 1 + countS.get(s[i], 0)
+
+
+        #Şİmdi hazırlanmış olan frekanslar hashmap'inden verilen k kadar uygun key çekicem
+        #Burda ilk k elemanı items üzerinden ne yazarak çekicem
+
+        sayac=0 #sayaç kullanarak k kadar değeri döndürdük
+        liste=list()
+
+        for j ,w in items: #sorted işlemi sonrası evet valye 'lara göre sıraladım fakat elimde key values olan tuple lar bulundu(key,value) şeklinde ben de iki değişkenli fro döngüsü ile içlerine girdim.
+
+            liste.append(j)
+
+            sayac+=1
+            if sayac==k:
+
+                return liste
+
+
+        '''
+
+PROBLEM:
+
+*Sorudan anladığım verilen bir tamsayı dizisinden k frekansı kadar tekrar
+elemanları çıktı olarak vericem.
+
+Hayır yanlış anladım
+*Frekansı en yüksek olan k tane değeri döndür
+Burda frekanslar 1->1 tane
+                 2->2 tane
+                 3->3 tane
+    k=2 olduğunden en yüksek frekanslı iki tanesini alıyorum
+    2 ve 3
+
+
+*Önceki problemdeki gibi her adım için dizi elemanına bakıp yoksa hash map'e
+bir key olarak ekleyebilir ve aynı döngüde value olarak da ekleme yapabiliriz.
+
+
+*İlgili çözüm aşamalarım sözde kod ve kodu yazarkenki düşüncelerim kodda 
+yorum satırı olarak ter almaktadır.        
+        
+
+*********ÇÖZÜM*********
+
+* öncelikle bir adet hash map oluşturduk ve bu hash_map frekansları, 
+frekans saymak için kullanacağımızdan get fonksiyonu kullandık. Oluşturulan
+Sözlük yapısından value değerleri için sıraladık sıralamamız sonucunda elimizde
+tuple ver tipinde veriler olmuş oldu ve frekanslarına göre sözlükten 
+sıralandılar. Daha sonra bu tuple'lardan for döngüsü ile key değerlerini
+Çekmek oldu. Bir sayaç ile birlikte de "ilk kaç elemanı çekeceğim?"problemini
+çözdük.
+
+
+        
+        '''
